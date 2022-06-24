@@ -1,40 +1,46 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 // include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 
 // create your first component
 const Home = () => {
-    const [Color, setColor] = useState(25);
-    const [selector, setselector] = useState(false);
+    const [arrayColor, setColor] = useState([25, 25, 25, 25]);
+    const [Add, setAdd] = useState(false);
+
     return (
+        //Verde
         <div className="container bg-dark vh-100" id="semaforo">
-            <span onMouseEnter={
-                    () => {
-                        setselector(true);
-                    }
-                }
+            <span onMouseEnter={() => { setColor([100, 25, 25, 25]) }}
                 className={
-                    `position-absolute top-0 start-50 translate-middle-x my-5 bg-success bg-opacity-${
-                        selector == true ? (onmouseleave =() => {
-                            setselector(false),
-                            setColor(25);
-                        }) : setColor(100)
-                    }`
-            }></span>
-        <span onMouseEnter={
-                () => setColor(100)
+                    `bg-success bg-opacity-${arrayColor[0]}`
+                }></span>
+            <span onMouseEnter={() => { setColor([25, 100, 25, 25]) }}
+                className={
+                    ` bg-warning bg-opacity-${arrayColor[1]}`
+                }></span>
+            <span onMouseEnter={() => {
+                setColor([25, 25, 100, 25])
             }
-            className={
-                `position-absolute top-50 start-50 translate-middle bg-warning bg-opacity-${Color}`
-        }></span>
-        <span onMouseEnter={
-                () => setColor(100)
             }
-            className={
-                `position-absolute bottom-0 start-50 translate-middle-x my-5 bg-danger bg-opacity-${Color}`
-        }></span>
-    </div>
+                className={
+                    ` bg-danger bg-opacity-${arrayColor[2]}`
+                }></span>
+            <span onMouseEnter={() => {
+                setColor([25, 25, 25, 100])
+            }
+            }
+                className={Add === true ? `
+                d-block bg-info bg-opacity-${arrayColor[3]}` : 'd-none'
+                }
+                ></span>
+            <div className="d-flex">
+                <button type="button" className="btn btn-outline-light m-2" onClick={() => { setAdd(Add === true ? false : true) }}>+</button>
+                <button type="button" className="btn btn-outline-light m-2" >Auto</button>
+            </div>
+        </div>
+
+
     );
 };
 
